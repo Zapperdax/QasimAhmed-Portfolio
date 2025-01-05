@@ -1,6 +1,7 @@
 import './globals.css'
 import { Poppins } from 'next/font/google'
 import { ThemeProvider } from './components/ThemeProvider'
+import BackToTop from './components/BackToTop'
 
 const poppins = Poppins({ 
   weight: ['300', '400', '500', '600', '700'],
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={poppins.className}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>{children}
+          <BackToTop />
+        </ThemeProvider>
       </body>
     </html>
   )
