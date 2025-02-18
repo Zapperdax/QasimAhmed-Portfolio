@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code } from "lucide-react";
+import { Code, Lock } from "lucide-react";
 import AnimatedDoodles from "./AnimatedDoodles";
 import Image from "next/image";
 
@@ -12,6 +12,14 @@ const projects = [
       "Developed an advanced emotion detection system that provided personalized recommendations for over 100 videos, quotes, songs, and movies through web scraping. Integrated a blogging platform where users could freely post or explore diverse blogs. Enhanced the experience with an AI-powered chatbot offering mood-based task suggestions and assistive conversations, creating a holistic and engaging user experience.",
     image: "/sentiment.png",
     codeUrl: "https://github.com/Zapperdax/Sentiment",
+  },
+  {
+    title: "Launch Spire",
+    description:
+      "A Next.js 15-powered platform where entrepreneurs can submit their startup ideas, participate in virtual pitch competitions, and explore innovative ventures—all within a clean, minimalistic interface for a seamless user experience. Built with React 19, Sanity, TailwindCSS, ShadCN, and TypeScript, it ensures a modern, scalable, and visually polished environment for founders to gain exposure and connect with like-minded innovators.",
+    image: "/launchspire.png",
+    codeUrl: "https://github.com/Zapperdax/launch-spire",
+    demo: "https://launch-spire.vercel.app/"
   },
   {
     title: "Evo Bot",
@@ -25,14 +33,12 @@ const projects = [
     description:
       "Designed and developed a high-performance system that protects, monitors, and manages over 100Gb/s of internet traffic in real-time. Built with an Assembly/C++ backend, a MEAN stack frontend, and a Spark-powered big data database, the system enables efficient traffic monitoring and processing. Features include blocking apps, IPs, and subscribers, call tracking, and a user-friendly graphical interface for seamless analysis and management.",
     image: "/hawkeye.jpg",
-    codeUrl: "https://github.com/",
   },
   {
     title: "Allo Dentiste",
     description:
       "Developed a comprehensive dentist management application designed to streamline operations with multiple management roles. The application facilitates seamless appointment booking, offers personalized treatment plans, and ensures efficient workflow management. With a robust 4-level permission system—Super Admin, Admin, Dentist, and Client—it provides tailored access and functionalities for each role, delivering a user-friendly and highly organized solution for dental practice management.",
     image: "/allodentist.png",
-    codeUrl: "https://github.com",
   },
 ];
 
@@ -109,21 +115,20 @@ export default function Projects() {
                 <p className="text-muted-foreground mb-4 group-hover:text-foreground transition-colors duration-300">
                   {project.description}
                 </p>
-                {index < 2 && (
                   <div className="flex space-x-4">
                     <motion.a
-                      href={project.codeUrl}
+                      href={project.demo ? project.demo : project.codeUrl ? project.codeUrl : undefined}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Code size={18} className="mr-2" />
-                      Code
+                      {(project.demo || project.codeUrl) && (<Code size={18} className="mr-2" />)}
+                      {(!project.demo && !project.codeUrl) && (<Lock size={18} className="mr-2" />)}
+                      {project.demo ? "Demo" : project.codeUrl ? "Code" : "Private"}
                     </motion.a>
                   </div>
-                )}
               </div>
             </motion.div>
           ))}
